@@ -1,27 +1,19 @@
 package refactoring;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Lloguer {
 	private Date data;
 	private int dies;
-	private ArrayList<Vehicle> vehicles;//=new ArrayList<Vehicle>();
-	
-
-	public Lloguer(Date data, int dies, ArrayList<Vehicle> vehicles) {
-		this.data = data;
-		this.dies = dies;
-		this.vehicles = vehicles;
-	}
+	//private ArrayList<Vehicle> vehicles;//=new ArrayList<Vehicle>();
+	private Vehicle vehicle;
 
 
 	public Lloguer(Date data, int dies, Vehicle vehicleBasic) {
 		// TODO Auto-generated constructor stub
 		this.data=data;
 		this.dies=dies;
-		this.vehicles=new ArrayList<Vehicle>();
-		this.vehicles.add(vehicleBasic);
+		this.vehicle=vehicleBasic;
 	}
 	
 	
@@ -38,12 +30,13 @@ public class Lloguer {
 	public void setDies(int dies) {
 		this.dies = dies;
 	}
-	public ArrayList<Vehicle> getVehicles() {
-		return vehicles;
+	public Vehicle getVehicle() {
+		return vehicle;
 	}
-	public void setVehicles(ArrayList<Vehicle> vehicles) {
-		this.vehicles = vehicles;
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
+
 	
 	
 }

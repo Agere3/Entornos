@@ -6,16 +6,28 @@ import java.util.Date;
 
 public class Main {
 	public static void main(String[] args) throws ParseException {
-		// demostració de construcció d'un vehicle de categoria BASIC
-		Vehicle vehicleBasic = new Vehicle("Tata", "Vista", Vehicle.BASIC);
-
-		// demostració de construccuó d'un lloguer amb una data
+		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy");
+		// demostració de construcció d'un vehicle de categoria BASIC
+		
+		Vehicle vehicle1 = new Vehicle("Tata", "Vista", Vehicle.BASIC);
 		Date date = dateFormat.parse("2/8/2013");
-		Lloguer lloguerBasic = new Lloguer(date, 2, vehicleBasic);
+		Lloguer lloguer1 = new Lloguer(date, 1, vehicle1);
+		
+		Vehicle vehicle2 = new Vehicle("Tete","Vestal", Vehicle.GENERAL);
+		Date date2 = dateFormat.parse("22/1/2018");
+		Lloguer lloguer2 = new Lloguer(date, 2, vehicle2);
+		
+		Vehicle vehicle3 = new Vehicle("Titi","Vistil", Vehicle.LUXE);
+		Date date3 = dateFormat.parse("3/3/2016");
+		Lloguer lloguer3 = new Lloguer(date, 3, vehicle3);
+		
+		Client micliente = new Client("41424344","Dave","+34 612345789");
+		micliente.afegeix(lloguer1);
+		micliente.afegeix(lloguer2);
+		micliente.afegeix(lloguer3);
+		System.out.println(micliente.informe());
 
-		// demostració de formatat d'una data
-		System.out.println(dateFormat.format(lloguerBasic.getData()));
 	}
 	
 	public static String GestorLloguersLite(Client client) {

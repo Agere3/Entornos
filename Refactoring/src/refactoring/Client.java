@@ -1,18 +1,18 @@
 package refactoring;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 public class Client {
 	private String nif;
 	private String nom;
 	private String telefon;
-	private ArrayList<Lloguer> lloguers;
+	private Vector<Lloguer> lloguers;
 	
 	public Client(String nif, String nom, String telefon) {
         this.nif = nif;
         this.nom = nom;
         this.telefon = telefon;
-        this.lloguers = new ArrayList<Lloguer>();
+        this.lloguers = new Vector<Lloguer>();
     }
 
     public String getNif()     { return nif;     }
@@ -46,6 +46,7 @@ public class Client {
             getNom() +
             " (" + getNif() + ")\n";
         for (Lloguer lloguer: lloguers) {
+        	/* A extraer
             double quantitat = 0;
             switch (lloguer.getVehicle().getCategoria()) {
                 case Vehicle.BASIC:
@@ -64,6 +65,9 @@ public class Client {
                     quantitat += lloguer.getDies() * 6;
                     break;
             }
+            */
+        	double quantitat = quantitatPerLloguer(lloguer); //nueva linea
+        
 
             // afegeix lloguers freqüents
             bonificacions ++;
@@ -88,5 +92,27 @@ public class Client {
             "Punts guanyats: " + bonificacions + "\n";
         return resultat;
     }
+
+	private double quantitatPerLloguer(Lloguer lloguer) {
+		double quantitat = 0;
+        switch (lloguer.getVehicle().getCategoria()) {
+            case Vehicle.BASIC:
+                quantitat += 3;
+                if (lloguer.getDies() > 3) {
+                    quantitat += (lloguer.getDies() - 3) * 1.5;
+                }
+                break;
+            case Vehicle.GENERAL:
+                quantitat += 4;
+                if (lloguer.getDies() > 2) {
+                    quantitat += (lloguer.getDies() - 2) * 2.5;
+                }
+                break;
+            case Vehicle.LUXE:
+                quantitat += lloguer.getDies() * 6;
+                break;
+        }
+		return quantitat;
+	}
 }
 

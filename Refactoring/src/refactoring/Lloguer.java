@@ -7,7 +7,15 @@ public class Lloguer {
 	private int dies;
 	//private ArrayList<Vehicle> vehicles;//=new ArrayList<Vehicle>();
 	private Vehicle vehicle;
-
+	private static final double VALOR_ALQUIER_CORTO_VEHICULO_BASICO = 3;
+	private static final double VALOR_PRECIO_DIARIO_VEHICULO_BASICO= 1.5;
+	private static final double LIMITE_DIAS_ALQUILER_CORTO_BASICO= 3;
+	
+	private static final double VALOR_ALQUIER_CORTO_VEHICULO_GENERAL = 4;
+	private static final double VALOR_PRECIO_DIARIO_VEHICULO_GENERAL= 2.5;
+	private static final double LIMITE_DIAS_ALQUILER_CORTO_GENERAL= 2;
+	
+	private static final double VALOR_PRECIO_DIARIO_VEHICULO_LUXE= 6;
 
 	public Lloguer(Date data, int dies, Vehicle vehicleBasic) {
 		// TODO Auto-generated constructor stub
@@ -39,26 +47,26 @@ public class Lloguer {
 	
 	
 	
-	public double quantitat() {
-		double quantitat = 0;
+	public double ImportTotalAPagar() {
+		double costTotalLloguers = 0;
         switch (getVehicle().getCategoria()) {
             case Vehicle.BASIC:
-                quantitat += 3;
-                if (getDies() > 3) {
-                    quantitat += (getDies() - 3) * 1.5;
+            	costTotalLloguers += VALOR_ALQUIER_CORTO_VEHICULO_BASICO;
+                if (getDies() > LIMITE_DIAS_ALQUILER_CORTO_BASICO) {
+                	costTotalLloguers += (getDies() - LIMITE_DIAS_ALQUILER_CORTO_BASICO) * VALOR_PRECIO_DIARIO_VEHICULO_BASICO;
                 }
                 break;
             case Vehicle.GENERAL:
-                quantitat += 4;
-                if (getDies() > 2) {
-                    quantitat += (getDies() - 2) * 2.5;
+            	costTotalLloguers += VALOR_ALQUIER_CORTO_VEHICULO_GENERAL;
+                if (getDies() > LIMITE_DIAS_ALQUILER_CORTO_GENERAL) {
+                	costTotalLloguers += (getDies() - LIMITE_DIAS_ALQUILER_CORTO_GENERAL) * VALOR_PRECIO_DIARIO_VEHICULO_GENERAL;
                 }
                 break;
             case Vehicle.LUXE:
-                quantitat += getDies() * 6;
+            	costTotalLloguers += getDies() * VALOR_PRECIO_DIARIO_VEHICULO_LUXE;
                 break;
         }
-		return quantitat;
+		return costTotalLloguers;
 	}
 	
 	public int bonificacions() {

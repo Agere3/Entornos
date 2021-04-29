@@ -60,6 +60,15 @@ public class Lloguer {
         }
 		return quantitat;
 	}
+	
+	public int bonificacions() {
+    	int bonificacions=1;
+    	if (getVehicle().getCategoria() == Vehicle.LUXE &&
+                getDies()>1 ) {
+            bonificacions ++;
+        }
+    	return bonificacions;
+    }
 
 	
 	

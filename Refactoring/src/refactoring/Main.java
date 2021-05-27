@@ -28,6 +28,7 @@ public class Main {
 		micliente.afegeix(lloguer3);
 		System.out.println(micliente.informe());
 
+
 	}
 	
 	public static String GestorLloguersLite(Client client) {

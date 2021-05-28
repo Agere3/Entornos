@@ -1,79 +1,41 @@
 package seguros;
 
-import java.util.ArrayList;
-
-public abstract class SeguroDeHogar {
-	protected String fechaContrato;
-	protected double cuotaAnualBase;
-	protected double descuentoORecargo;
-	protected Cliente cliente;
-	protected Poliza poliza;
-	protected ArrayList<Parte> partes = new ArrayList<Parte>();
+public class SeguroDeHogar extends Seguro{
+	private String tipoVivienda;
 	
-	
-	//Ejercicio 2
-	public String listaPartesEntreFechas(String fechaInicio, 
-			String fechaFinal) {
-		String res="";
-		for(Parte parte:partes) {
-			if(Fecha.compareTo(fechaInicio,parte.getFecha())==-1 && 
-					Fecha.compareTo(fechaFinal,parte.getFecha())==1) {
-				res += parte;
-			}
-		}
-		return res;
+	public SeguroDeHogar(String fechaContrato, double cuotaAnualBase, double descuentoORecargo, Cliente cliente,
+			Poliza poliza, String tipoVivienda) {
+		super(fechaContrato, cuotaAnualBase, descuentoORecargo, cliente, poliza);
+		this.tipoVivienda = tipoVivienda;
 	}
-	//Ejercicio 3
-	public int numpartesEnAnyo(int anyo) {
-		int res=0;
-		for(Parte parte:partes) {
-			if(Fecha.getAnyoDeFecha(parte.getFecha())==anyo) {
-				res ++;
-			}
-		}
-		return res;
+	
+	public SeguroDeHogar() {
+		super();
 	}
 
-	public double costeIncidenciaEnAnyo(int anyo) {
-		int res=0;
-		for(Parte parte:partes) {
-			if(Fecha.getAnyoDeFecha(parte.getFecha())==anyo) {
-				//if fechaInicio< fecha concreta < fecha final
-				res += parte.getCosteIndemnizacion();
-			}
-		}
-		return res;
+	@Override
+	public int getN() {
+		// TODO Auto-generated method stub
+		return 3;
 	}
-	
-	//Ejercicio 4
-	public void actualizarDescuentoORecargo() {
-		if(numpartesEnAnyo(Fecha.getAnyoDeFecha(Fecha.getFechaDeHoy())-1)==getN() ||
-				costeIncidenciaEnAnyo(Fecha.getAnyoDeFecha(Fecha.getFechaDeHoy())-1)>getTOTIND()) {
-				descuentoORecargo += getD1();
-		}
-		if(numpartesEnAnyo(Fecha.getAnyoDeFecha(Fecha.getFechaDeHoy())-1)==0) {
-			descuentoORecargo -= getD2();
-		}
-		if(descuentoORecargo>25) descuentoORecargo=25;
-		if(descuentoORecargo<-15) descuentoORecargo=-15;
-		
+
+	@Override
+	public double getTOTIND() {
+		// TODO Auto-generated method stub
+		return 700;
 	}
-	
-	public abstract int getN();
-	public abstract double getTOTIND();
-	public abstract int getD1();
-	public abstract int getD2();
-	
-	
-	public SeguroDeHogar(String fechaContrato, double cuotaAnualBase, 
-			double descuentoORecargo, Cliente cliente, Poliza poliza) {
-		this.fechaContrato = fechaContrato;
-		this.cuotaAnualBase = cuotaAnualBase;
-		this.descuentoORecargo = descuentoORecargo;
-		this.cliente = cliente;
-		this.poliza = poliza;
+
+	@Override
+	public int getD1() {
+		// TODO Auto-generated method stub
+		return 5;
 	}
-	public SeguroDeHogar() {}
+
+	@Override
+	public int getD2() {
+		// TODO Auto-generated method stub
+		return 2;
+	}
 	
 	
 }

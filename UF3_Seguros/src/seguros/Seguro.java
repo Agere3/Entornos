@@ -9,31 +9,31 @@ public abstract class Seguro {
 	protected Cliente cliente;
 	protected Poliza poliza;
 	protected ArrayList<Parte> partes = new ArrayList<Parte>();
-	
-	
-	//Ejercicio 2
+	//ex2
 	public String listaPartesEntreFechas(String fechaInicio, 
 			String fechaFinal) {
 		String res="";
 		for(Parte parte:partes) {
 			if(Fecha.compareTo(fechaInicio,parte.getFecha())==-1 && 
 					Fecha.compareTo(fechaFinal,parte.getFecha())==1) {
+				//if fechaInicio< fecha concreta < fecha final
 				res += parte;
 			}
 		}
 		return res;
 	}
-	//Ejercicio 3
+	//ex3 p1
 	public int numpartesEnAnyo(int anyo) {
 		int res=0;
 		for(Parte parte:partes) {
 			if(Fecha.getAnyoDeFecha(parte.getFecha())==anyo) {
+				//if fechaInicio< fecha concreta < fecha final
 				res ++;
 			}
 		}
 		return res;
 	}
-
+	//ex3 p2
 	public double costeIncidenciaEnAnyo(int anyo) {
 		int res=0;
 		for(Parte parte:partes) {
@@ -45,7 +45,7 @@ public abstract class Seguro {
 		return res;
 	}
 	
-	//Ejercicio 4
+	//ex4
 	public void actualizarDescuentoORecargo() {
 		if(numpartesEnAnyo(Fecha.getAnyoDeFecha(Fecha.getFechaDeHoy())-1)==getN() ||
 				costeIncidenciaEnAnyo(Fecha.getAnyoDeFecha(Fecha.getFechaDeHoy())-1)>getTOTIND()) {
@@ -72,6 +72,7 @@ public abstract class Seguro {
 		this.descuentoORecargo = descuentoORecargo;
 		this.cliente = cliente;
 		this.poliza = poliza;
+		//this.partes = new ArrayList<Parte>();
 	}
 	public Seguro() {}
 	
